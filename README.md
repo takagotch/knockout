@@ -24,8 +24,22 @@ ko.bindingHandlers.withProperties = {
     return { controlsDescendantBindngs: true };
   }
 };
+
+ko.bindingHandlers.withProperties = {
+  init: function(element, valueAccessor, allBinding, viewModel, bindingContext){
+    var childBindingContext = bindingContext.createChildContet(
+      bindingContext.$rawData,
+      null,
+      function(context){
+        ko.utils.extend(context, valueAcessor());
+      });
+    ko.applyBindingsToDescendants(childBindingContext, element);
+    return { controlsDescendantBindings: true };
+  }
+};
 ```
 
 ```
+// https://knockoutjs.com/documentation/computedObservables.html
 ```
 
